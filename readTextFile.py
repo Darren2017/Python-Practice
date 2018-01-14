@@ -6,12 +6,11 @@
 
 fname = raw_input('Enter Filename:' ) 
 print
-
 try:
     fobj = open(fname, 'r')
 except IOError, e:
     print "***file open error", e
 else:
     for eachLine in fobj:
-        print eachLine
+        print eachLine,
     fobj.close()
