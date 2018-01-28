@@ -1,4 +1,5 @@
 #!usr/bin/env python
+#创建一个文档，并键入内容
 
 'makeTextFile.py -- create text file'
 

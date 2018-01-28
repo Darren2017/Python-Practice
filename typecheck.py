@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#检查类型
 
 def displayNumType(num):
     print num, 'is',

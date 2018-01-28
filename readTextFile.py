@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#读取文档内容
 
 'readTextFile.py -- read and display text file'
 
@@ -9,8 +10,8 @@ print
 try:
     fobj = open(fname, 'r')
 except IOError, e:
-    print "***file open error", e
+    print "***file open error***", e
 else:
     for eachLine in fobj:
-        print eachLine,
+        print eachLine.strip("\n")
     fobj.close()
