@@ -5,13 +5,13 @@ import string
 db = {}
 dt = {}
 
-def md5(str):
+def md5(str):                                               #md5加密函数
     import hashlib
     m = hashlib.md5()
     m.update(str)
     return m.hexdigest()
 
-def newuser():
+def newuser():                                              #新用户登录函数
     while True:
         name = raw_input('Enter your name:')
         for i in name:
@@ -27,7 +27,7 @@ def newuser():
     dt[name] = datetime.datetime.now()
     print 'success to join'
 
-def olduser():
+def olduser():                                              #老用户登录函数
     while True:
         name = raw_input('Enter your name: ')
         if name not in db:
@@ -53,7 +53,7 @@ def olduser():
                 print 'You already logged in at :', dt[name]
             dt[name] = datetime.datetime.now()
             break
-def manager():
+def manager():                                              #管理员函数
     def delete():
         delete = raw_input('Enter the name you want to delete: ')
         del db[delete]
@@ -79,7 +79,7 @@ def manager():
 
 
 
-def showmenu():
+def showmenu():                                             #显示菜单
     while True:
         pr = '''
         (O)lduser
@@ -103,5 +103,5 @@ def showmenu():
             manager()
         elif choice == 'q':
             break
-if __name__ == '__main__':
+if __name__ == '__main__':                                  #主程序入口                        
     showmenu()
