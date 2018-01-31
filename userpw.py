@@ -6,7 +6,7 @@ def newuser():
     while True:
         name = raw_input('Enter your name:')
         if name in db:
-            print 'Name has existed, please Enter again'
+            print 'Name has existed, please enter again'
         else:
             break
     db[name] = raw_input('Enter your password:')
@@ -33,7 +33,8 @@ def showmenu():
         pr = '''
         (O)lduser
         (N)ewuser
-        (Q)uit    '''
+        (Q)uit
+        '''
         while True:
             try:
                 choice = raw_input(pr).strip()[0].lower()
