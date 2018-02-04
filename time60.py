@@ -11,25 +11,36 @@ class Time60(object):
 
     def __str__(self):
         'Time60 - srting repersentation'
-        return '%d:%d' % (self.hr, self.min)
+        return '%02d:%02d' % (self.hr, self.min)
 
     __repr__ = __str__
     
     def __add__(self, other):
 
         'Time60 - overloading the addition operator'
-        return self.__class__(self.hr + other.hr, self.min + other.min)
+        if self.min + other.min > 60:
+            return self.__class__(self.hr + other.hr + 1, self.min + other.min -60)
+        else:
+            return self.__class__(self.hr + other.hr, self.min + other.min)
     def __iadd__(self, other):
         'Time60 - overloading in-place addition'
-        self.hr += other.hr
-        self.min += other.min
+        if self.min + other.min > 60:
+            self.hr += (other.hr + 1)
+            self.min += (other.min - 60)
+        else:
+            self.hr += other.hr
+            self.min += other.min
         return self
 
 mon = Time60(10, 30)
-tue = Time60(11, 15)
+tue = Time60(11, 55)
+
+print tue
 
 print id(mon)
 
 mon += tue
 
 print id(mon)
+
+print mon
