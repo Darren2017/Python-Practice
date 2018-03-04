@@ -3,7 +3,6 @@
 
 import requests
 from bs4 import BeautifulSoup
-import json
 
 url = "https://account.ccnu.edu.cn/cas/login"
 
