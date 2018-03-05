@@ -7,8 +7,7 @@ from bs4 import BeautifulSoup
 url = "https://account.ccnu.edu.cn/cas/login"
 
 
-ccnu_session = requests.Session()
-f = ccnu_session.get(url)
+f = requests.get(url)
 
 cookie = f.headers.get('set-cookie')
 Cookie = cookie[0:49]
@@ -45,5 +44,5 @@ data = { 'username' : '2017211661',
          'submit' : '登录'
 }
 
-f = requests.post(url + Cookie, data = data, headers = headers)
-print f.headers
+response = requests.post(url, data = data, headers = headers)
+print response.headers
