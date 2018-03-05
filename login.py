@@ -37,7 +37,7 @@ headers = {
 }
 
 data = { 'username' : '2017211661',
-         'passward' : 'TAM137731',
+         'password' : 'TAM137731',
          'lt' : lt,
          'execution' : execution,
          '_eventId' : 'submit',
