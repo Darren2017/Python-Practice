@@ -27,10 +27,10 @@ def printunvilist(ulist, num):
 
 def main():
     url = "http://www.zuihaodaxue.cn/shengyuanzhiliangpaiming2018.html"
-    num = 20
+    num = 50
     ulist = []
     html = gethtmltext(url)
     fillunvilist(ulist, html)
-    printunvilist(ulist, 20)
+    printunvilist(ulist, num)
 
 main()
