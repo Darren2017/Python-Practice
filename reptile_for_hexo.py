@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def gethtmltext(url):           #获取文章内容，用于导入beautifulsoup进行解析
+def gethtmltext(url):           #获取博客内容，用于导入beautifulsoup进行解析
     try:
         r = requests.get(url)
         r.raise_for_status()
@@ -10,19 +10,24 @@ def gethtmltext(url):           #获取文章内容，用于导入beautifulsoup�
     except:
         return ""
 
-def main():
+def makemainurl():
     preurl = "https://"
     namerul = input("input blog's name:  ")     #所爬博客的名字
+    
+    surl = ".github.io"                     #构建请求文章的URL
+    url = preurl + namerul + surl
+
+    return url
+
+def confirmpage():
     page = input("input the page:  ")           #确定爬取博客的第几页
     if page == '1':
         pages = ""
     else:
         pages = '/page/' + str(page)
-    surl = ".github.io"                     #构建请求文章的URL
-    url = preurl + namerul + surl
-    html = gethtmltext(url + pages)
-    print(url + pages)
-    soup = BeautifulSoup(html, "html.parser")   #解析文本
+    return pages
+
+def fillfile(html, soup, url):
     f = open('hexo', 'w')
     for link in soup.find_all('a', class_ = "post-title-link"):     #在相应的a标签中获取文章部分链接
         newurl = url + link.get('href')                     #构建文章对应的链接
@@ -36,6 +41,12 @@ def main():
         f.writelines(bodys)
         f.write("--------------------------------------" + '\n' + '\n' + '\n' + '\n' + '\n')
 
-
+def main():
+    url = makemainurl()
+    pages = confirmpage()
+    html = gethtmltext(url + pages)
+    soup = BeautifulSoup(html, "html.parser")   #解析文本
+    fillfile(html, soup, url)
+    
 if __name__ == '__main__':
     main()
