@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def gethtmltext(url):
+def gethtmltext(url):           #获取文章内容，用于导入beautifulsoup进行解析
     try:
         r = requests.get(url)
         r.raise_for_status()
@@ -12,29 +12,30 @@ def gethtmltext(url):
 
 def main():
     preurl = "https://"
-    namerul = input("input blog's name:  ")
-    page = input("input the page:  ")
-    if page == 1:
+    namerul = input("input blog's name:  ")     #所爬博客的名字
+    page = input("input the page:  ")           #确定爬取博客的第几页
+    if page == '1':
         pages = ""
     else:
-        pages = '/page/' + str(page) + "/"
-    surl = ".github.io"
+        pages = '/page/' + str(page)
+    surl = ".github.io"                     #构建请求文章的URL
     url = preurl + namerul + surl
     html = gethtmltext(url + pages)
-    soup = BeautifulSoup(html, "html.parser")
+    print(url + pages)
+    soup = BeautifulSoup(html, "html.parser")   #解析文本
     f = open('hexo', 'w')
-    for link in soup.find_all('a', class_ = "post-title-link"):
-        hrefs = url + link.get('href')
-        newurl = url + link.get('href')
+    for link in soup.find_all('a', class_ = "post-title-link"):     #在相应的a标签中获取文章部分链接
+        newurl = url + link.get('href')                     #构建文章对应的链接
         newhtml = gethtmltext(newurl)
-        newsoup = BeautifulSoup(newhtml, "html.parser")
-        titles = newsoup.find('h2', class_="post-title").get_text()
-        bodys = newsoup.find('div', class_ = "post-body").get_text()
-        print("已完成： " + titles)
-        f.writelines("标题:  " + titles + '\n')
-        f.writelines("连接:  " + hrefs + '\n')
+        newsoup = BeautifulSoup(newhtml, "html.parser")        #将文章链接导入beautifulsoup进行解析
+        titles = newsoup.find('h2', class_="post-title").get_text()         #获取文章标题
+        bodys = newsoup.find('div', class_ = "post-body").get_text()        #获取正文内容
+        print("已完成： " + titles)                     #提示用户正在进行爬取，不然万一用户以为程序卡了怎么办
+        f.writelines("标题:  " + titles + '\n')         #将标题和正文写入文件
+        f.writelines("连接:  " + newurl + '\n')
         f.writelines(bodys)
         f.write("--------------------------------------" + '\n' + '\n' + '\n' + '\n' + '\n')
 
 
-main()
+if __name__ == '__main__':
+    main()
