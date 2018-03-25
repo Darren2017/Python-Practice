@@ -13,7 +13,7 @@ def gethtmltext(url):           #获取博客内容，用于导入beautifulsoup�
 def makemainurl():
     preurl = "https://"
     namerul = input("input blog's name:  ")     #所爬博客的名字
-    
+    namerul = str(namerul)
     surl = ".github.io"                     #构建请求文章的URL
     url = preurl + namerul + surl
 
@@ -33,7 +33,8 @@ def fillfile(html, soup, url):
         newurl = url + link.get('href')                     #构建文章对应的链接
         newhtml = gethtmltext(newurl)
         newsoup = BeautifulSoup(newhtml, "html.parser")        #将文章链接导入beautifulsoup进行解析
-        titles = newsoup.find('h2', class_="post-title").get_text()         #获取文章标题
+        titles = newsoup.find('h1', class_="post-title").get_text()         #获取文章标题---------这里有个bug，有的博客标题在h1的标签中，有的在h2或者h3中，有点无能为力，可以把这句注释掉
+
         bodys = newsoup.find('div', class_ = "post-body").get_text()        #获取正文内容
         print("已完成： " + titles)                     #提示用户正在进行爬取，不然万一用户以为程序卡了怎么办
         f.writelines("标题:  " + titles + '\n')         #将标题和正文写入文件
