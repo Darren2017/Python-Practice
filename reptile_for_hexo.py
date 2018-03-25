@@ -33,10 +33,21 @@ def fillfile(html, soup, url):
         newurl = url + link.get('href')                     #构建文章对应的链接
         newhtml = gethtmltext(newurl)
         newsoup = BeautifulSoup(newhtml, "html.parser")        #将文章链接导入beautifulsoup进行解析
-        titles = newsoup.find('h1', class_="post-title").get_text()         #获取文章标题---------这里有个bug，有的博客标题在h1的标签中，有的在h2或者h3中，有点无能为力，可以把这句注释掉
-
         bodys = newsoup.find('div', class_ = "post-body").get_text()        #获取正文内容
-        print("已完成： " + titles)                     #提示用户正在进行爬取，不然万一用户以为程序卡了怎么办
+        try:   
+            titles = newsoup.find('h1', class_="post-title").get_text()         #获取文章标题--不同的博客title的储存标签不一样，所以用的多个try-except语句进行异常处理
+            print("已完成： " + titles)                                           #提示用户正在进行爬取，不然万一用户以为程序卡了怎么办
+        except:
+            try:
+                titles = newsoup.find('h2', class_="post-title").get_text()
+                print("已完成： " + titles)
+            except:
+                try:
+                    titles = newsoup.find('h3', class_="post-title").get_text()
+                    print("已完成： " + titles)
+                except:
+                    print("标题添加失败")
+                    return 0
         f.writelines("标题:  " + titles + '\n')         #将标题和正文写入文件
         f.writelines("连接:  " + newurl + '\n')
         f.writelines(bodys)
