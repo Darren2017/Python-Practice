@@ -1,7 +1,7 @@
 #coding:utf-8
 def write(so):
     fr = open(so, 'r')
-    fw = open('newone.doc', 'w')
+    fw = open('newone.xlsx', 'w')
     for txt in fr:
         fw.write(txt)
     fw.close()

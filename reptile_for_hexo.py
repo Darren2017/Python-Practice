@@ -1,4 +1,4 @@
-import requests
+import requests     #用python3运行
 from bs4 import BeautifulSoup
 
 def gethtmltext(url):           #获取博客内容，用于导入beautifulsoup进行解析

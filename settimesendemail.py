@@ -52,7 +52,7 @@ def send_mail2(to, subject, **kwargs):
 
 @celery.on_after_configure.connect              
 def setup_periodic_tasks(sender, **kwargs):         #由 celery beat实现周期性调用
-	sender.add_periodic_task(5.0,send_async_email.s(msg_dict2('1292594829@qq.com',' 一封邮件')))
+	sender.add_periodic_task(5.0,send_async_email.s(msg_dict2('1113713599@qq.com',' 一封邮件')))
 
 
 if __name__ == '__main__' :
