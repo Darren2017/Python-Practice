@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 #-*-coding:utf-8-*-
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -11,13 +10,13 @@ f = requests.get(url)
 
 cookie = f.headers.get('set-cookie')
 Cookie = cookie[0:49]
-print Cookie
+print (Cookie)
 
 soup = BeautifulSoup(f.content, "html.parser")
 lt = soup.find('input', {'name' : 'lt'}) ['value']
 execution = soup.find('input',{'name' : 'execution'}) ['value']
-print 'lt : ', lt
-print 'execution : ', execution
+print ('lt : ', lt)
+print ('execution : ', execution)
 
 
 headers = {
@@ -45,12 +44,12 @@ data = { 'username' : '2017211661',
 }
 
 response = requests.post(url, data = data, headers = headers)
-print 'Content-Length', response.headers.get('content-length')
-print 'Set-Cookie : ', response.headers.get('set-cookie')
-print 'Expires : ', response.headers.get('Expires')
-print 'Server : ', response.headers.get('server')
-print 'Connection : ', response.headers.get('connection')
-print 'Pragma : ', response.headers.get('pragma')
-print 'Cache-Control : ', response.headers.get('cache-control')
-print 'Date : ', response.headers.get('date')
-print 'Content-Type : ', response.headers.get('content-type')
+print ('Content-Length', response.headers.get('content-length'))
+print ('Set-Cookie : ', response.headers.get('set-cookie'))
+print ('Expires : ', response.headers.get('Expires'))
+print ('Server : ', response.headers.get('server'))
+print ('Connection : ', response.headers.get('connection'))
+print ('Pragma : ', response.headers.get('pragma'))
+print ('Cache-Control : ', response.headers.get('cache-control'))
+print ('Date : ', response.headers.get('date'))
+print ('Content-Type : ', response.headers.get('content-type'))
